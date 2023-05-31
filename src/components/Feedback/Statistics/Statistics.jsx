@@ -8,7 +8,7 @@ export const Statistics = props => {
       <StatList>
         {total > 0 ? (
           Object.keys(props).map(el => {
-            if (el === 'statTitle' || el === 'message') return;
+            if (el === 'message') return;
             return (
               <StatItem key={el}>
                 {customizeText(el)}: {props[el]}
