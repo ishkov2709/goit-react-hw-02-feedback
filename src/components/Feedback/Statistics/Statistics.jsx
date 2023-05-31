@@ -5,20 +5,20 @@ export const Statistics = props => {
   const { total, message } = props;
   return (
     <>
-      <StatList>
-        {total > 0 ? (
-          Object.keys(props).map(el => {
+      {total > 0 ? (
+        <StatList>
+          {Object.keys(props).map(el => {
             if (el === 'message') return;
             return (
               <StatItem key={el}>
                 {customizeText(el)}: {props[el]}
               </StatItem>
             );
-          })
-        ) : (
-          <NotificationMessage>{message}</NotificationMessage>
-        )}
-      </StatList>
+          })}
+        </StatList>
+      ) : (
+        <NotificationMessage>{message}</NotificationMessage>
+      )}
     </>
   );
 };
