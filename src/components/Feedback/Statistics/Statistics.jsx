@@ -3,11 +3,12 @@ import customizeText from 'utils/customizeText';
 
 export const Statistics = props => {
   const { total, message } = props;
+  const arr = [...Object.keys(props)];
   return (
     <>
       {total > 0 ? (
         <StatList>
-          {Object.keys(props).map(el => {
+          {arr.map(el => {
             if (el === 'message') return;
             return (
               <StatItem key={el}>
