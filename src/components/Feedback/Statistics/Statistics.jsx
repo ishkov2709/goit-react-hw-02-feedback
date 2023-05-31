@@ -1,12 +1,8 @@
-import {
-  StatList,
-  StatItem,
-  NotificationMessage,
-} from './Statistics.styled';
+import { StatList, StatItem, NotificationMessage } from './Statistics.styled';
 import customizeText from 'utils/customizeText';
 
 export const Statistics = props => {
-  const { total, statTitle, message } = props;
+  const { total, message } = props;
   return (
     <>
       <StatList>
