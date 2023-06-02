@@ -1,5 +1,6 @@
 import { BtnList, ItemBtn, Btn } from './FeedbackOptions.styled';
 import customizeText from 'utils/customizeText';
+import PropTypes from 'prop-types';
 
 const FeedbackOptions = props => {
   const { options, onLeaveFeedback } = props;
@@ -24,3 +25,8 @@ const FeedbackOptions = props => {
 };
 
 export default FeedbackOptions;
+
+FeedbackOptions.propTypes = {
+  options: PropTypes.objectOf(PropTypes.number),
+  onLeaveFeedback: PropTypes.func,
+};

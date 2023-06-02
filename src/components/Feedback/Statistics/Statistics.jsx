@@ -1,5 +1,6 @@
 import { StatList, StatItem, NotificationMessage } from './Statistics.styled';
 import customizeText from 'utils/customizeText';
+import PropTypes from 'prop-types';
 
 export const Statistics = props => {
   const { total, message } = props;
@@ -25,3 +26,12 @@ export const Statistics = props => {
 };
 
 export default Statistics;
+
+Statistics.propTypes = {
+  good: PropTypes.number,
+  neutral: PropTypes.number,
+  bad: PropTypes.number,
+  total: PropTypes.number,
+  positivePercentage: PropTypes.string,
+  message: PropTypes.string,
+};

@@ -1,4 +1,5 @@
 import { Box, Title } from './Section.styled';
+import PropTypes from 'prop-types';
 
 const Section = props => {
   const { title, children } = props;
@@ -11,3 +12,8 @@ const Section = props => {
 };
 
 export default Section;
+
+Section.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.object,
+};
