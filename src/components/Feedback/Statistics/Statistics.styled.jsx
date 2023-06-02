@@ -7,7 +7,3 @@ export const StatList = styled.ul`
 export const StatItem = styled.li`
   font-size: 24px;
 `;
-
-export const NotificationMessage = styled.p`
-  font-size: 24px;
-`;

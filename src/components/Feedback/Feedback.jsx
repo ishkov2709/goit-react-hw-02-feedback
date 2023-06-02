@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrapper } from './Feedback.styled';
+import { Wrapper, NotificationMessage } from './Feedback.styled';
 import Statistics from './Statistics';
 import FeedbackOptions from './FeedbackOptions';
 import Section from './Section';
@@ -9,53 +9,49 @@ class Feedback extends React.Component {
     good: 0,
     neutral: 0,
     bad: 0,
-    total: 0,
   };
 
-  leaveFeedbackHendler = e => {
-    const nameBtn = e.target.name;
+  onLeaveFeedback = option => {
     this.setState(prevState => {
-      return { [nameBtn]: prevState[nameBtn] + 1 };
+      return { [option]: prevState[option] + 1 };
     });
-    this.countTotalFeedback();
   };
 
   countTotalFeedback() {
-    this.setState(prevState => {
-      return {
-        total: prevState.total + 1,
-      };
-    });
+    return Object.values(this.state).reduce((total, value) => {
+      return total + value;
+    }, 0);
   }
 
-  countPositiveFeedbackPercentage = (good, total) => {
-    return `${Math.round((good / total) * 100)}%`;
+  countPositiveFeedbackPercentage = total => {
+    return `${Math.round((this.state.good / total) * 100)}%`;
   };
 
   render() {
-    const { good, neutral, bad, total } = this.state;
-    const res = this.countPositiveFeedbackPercentage(
-      this.state.good,
-      this.state.total
-    );
+    const { good, neutral, bad } = this.state;
+    const total = this.countTotalFeedback();
+    const res = this.countPositiveFeedbackPercentage(total);
     return (
       <Wrapper>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={this.state}
-            onLeaveFeedback={this.leaveFeedbackHendler}
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.onLeaveFeedback}
           ></FeedbackOptions>
         </Section>
 
         <Section title="Statistics">
-          <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={total}
-            positivePercentage={res}
-            message="There is no feedback"
-          />
+          {total > 0 ? (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={total}
+              positivePercentage={res}
+            />
+          ) : (
+            <NotificationMessage>There is no feedback</NotificationMessage>
+          )}
         </Section>
       </Wrapper>
     );

@@ -2,21 +2,23 @@ import { BtnList, ItemBtn, Btn } from './FeedbackOptions.styled';
 import customizeText from 'utils/customizeText';
 import PropTypes from 'prop-types';
 
-const FeedbackOptions = props => {
-  const { options, onLeaveFeedback } = props;
+const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
     <>
       <BtnList>
-        {Object.keys(options).map(el => {
+        {options.map(option => {
           return (
-            el !== 'total' &&
-            el !== 'positiveFeedback' && (
-              <ItemBtn key={el}>
-                <Btn type="button" name={el} onClick={onLeaveFeedback}>
-                  {customizeText(el)}
-                </Btn>
-              </ItemBtn>
-            )
+            <ItemBtn key={option}>
+              <Btn
+                type="button"
+                name={option}
+                onClick={() => {
+                  onLeaveFeedback(option);
+                }}
+              >
+                {customizeText(option)}
+              </Btn>
+            </ItemBtn>
           );
         })}
       </BtnList>
@@ -27,6 +29,6 @@ const FeedbackOptions = props => {
 export default FeedbackOptions;
 
 FeedbackOptions.propTypes = {
-  options: PropTypes.objectOf(PropTypes.number),
+  options: PropTypes.arrayOf(PropTypes.string),
   onLeaveFeedback: PropTypes.func,
 };

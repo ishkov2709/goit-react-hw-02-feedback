@@ -1,26 +1,19 @@
-import { StatList, StatItem, NotificationMessage } from './Statistics.styled';
+import { StatList, StatItem } from './Statistics.styled';
 import customizeText from 'utils/customizeText';
 import PropTypes from 'prop-types';
 
 export const Statistics = props => {
-  const { total, message } = props;
   return (
     <>
-      {total > 0 ? (
-        <StatList>
-          {Object.keys(props).map(el => {
-            return el !== 'message' ? (
-              <StatItem key={el}>
-                {customizeText(el)}: {props[el]}
-              </StatItem>
-            ) : (
-              ''
-            );
-          })}
-        </StatList>
-      ) : (
-        <NotificationMessage>{message}</NotificationMessage>
-      )}
+      <StatList>
+        {Object.keys(props).map(el => {
+          return (
+            <StatItem key={el}>
+              {customizeText(el)}: {props[el]}
+            </StatItem>
+          );
+        })}
+      </StatList>
     </>
   );
 };
@@ -33,5 +26,4 @@ Statistics.propTypes = {
   bad: PropTypes.number,
   total: PropTypes.number,
   positivePercentage: PropTypes.string,
-  message: PropTypes.string,
 };
